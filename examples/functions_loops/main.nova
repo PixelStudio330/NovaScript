@@ -1,0 +1,128 @@
+# Functions, Loops, and Recursion Examples
+# Demonstrates key NovaScript language features
+
+# ============================================================================
+# FUNCTIONS
+# ============================================================================
+
+function greet(name):
+{
+    print("Hello, " + name + "!")
+}
+
+greet("Alice")
+greet("Bob")
+
+# Function with return value
+function add(a, b):
+{
+    return a + b
+}
+
+var result = add(5, 7)
+print("5 + 7 = " + result)
+
+# ============================================================================
+# LOOPS
+# ============================================================================
+
+# For loop - counting from 1 to 5
+print("")
+print("For loop (1 to 5):")
+for (var i = 1 : i <= 5 : i = i + 1): {
+    print("Number: " + i)
+}
+
+# While loop - countdown
+print("")
+print("While loop (countdown):")
+var count = 3
+while (count >= 1): {
+    print("Countdown: " + count)
+    count = count - 1
+}
+
+# ============================================================================
+# RECURSION
+# ============================================================================
+
+# Factorial using recursion
+function factorial(n):
+{
+    if (n <= 1): {
+        return 1
+    }
+    return n * factorial(n - 1)
+}
+
+print("")
+print("Factorial(5) = " + factorial(5))
+print("Factorial(10) = " + factorial(10))
+
+# Fibonacci using recursion
+function fibonacci(n):
+{
+    if (n <= 1): {
+        return n
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+print("")
+print("Fibonacci sequence (first 10):")
+for (var i = 0 : i < 10 : i = i + 1): {
+    print("fib(" + i + ") = " + fibonacci(i))
+}
+
+# ============================================================================
+# CONDITIONALS
+# ============================================================================
+
+print("")
+print("Grade calculator:")
+
+function getGrade(score):
+{
+    if (score >= 90): {
+        return "A"
+    } else: {
+        if (score >= 80): {
+            return "B"
+        } else: {
+            if (score >= 70): {
+                return "C"
+            } else: {
+                return "F"
+            }
+        }
+    }
+}
+
+var scores = [95, 87, 73, 65]
+var s1 = 95
+print("Score " + s1 + " → Grade: " + getGrade(s1))
+
+var s2 = 87
+print("Score " + s2 + " → Grade: " + getGrade(s2))
+
+var s3 = 73
+print("Score " + s3 + " → Grade: " + getGrade(s3))
+
+var s4 = 65
+print("Score " + s4 + " → Grade: " + getGrade(s4))
+
+# ============================================================================
+# TABLE EXAMPLE
+# ============================================================================
+
+print("")
+print("Multiplication table (5x5):")
+
+for (var row = 1 : row <= 5 : row = row + 1): {
+    var line = ""
+    for (var col = 1 : col <= 5 : col = col + 1): {
+        var product = row * col
+        line = line + product + "\t"
+    }
+    print(line)
+}

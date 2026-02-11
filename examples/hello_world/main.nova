@@ -1,0 +1,21 @@
+# Hello World Example
+# A simple introduction to NovaScript
+
+print("Hello, World!")
+print("Welcome to NovaScript!")
+print("")
+
+# Variables
+var name = "Nova"
+var version = 1.0
+print("Language: " + name + " v" + version)
+
+# Basic arithmetic
+var x = 10
+var y = 20
+print("Sum: " + (x + y))
+print("Product: " + (x * y))
+
+# Strings
+var greeting = "Welcome"
+print(greeting + " to " + name + "!")

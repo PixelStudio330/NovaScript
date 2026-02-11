@@ -1,57 +1,48 @@
-# NovaScript Web IDE - Quick Start Guide
+# NovaScript Web IDE - Quick Reference Guide
 
-## 🚀 Getting Started
+## 🎯 Quick Access
 
-Your fully functional web-based NovaScript IDE is now running!
+**URL**: `http://127.0.0.1:5000/`
 
-### Access the IDE
+## IDE Layout
 
-Open your browser and visit:
-```
-http://127.0.0.1:5000
-```
+### 1. Code Editor (Left Panel)
+- Syntax highlighting with line numbers
+- Pre-loaded with example code
+- Auto-indentation and bracket matching
 
-## 💡 Features You'll See
+### 2. Output Console (Right Panel)
+- Terminal-style output display
+- Shows `print()` results
+- Error messages in red
+- Auto-scrolls to new output
 
-### 1. **Code Editor (Left Panel)**
-   - Pre-loaded with example NovaScript code
-   - Syntax highlighting with line numbers
-   - Supports all NovaScript keywords: var, function, print, if, else, for, while, return
+### 3. Control Buttons
+- **▶ Run Code** - Execute code (or Ctrl+Enter)
+- **✕ Clear Output** - Clear console
+- **↻ Reset** - Restore default example
 
-### 2. **Control Buttons (Top Right)**
-   - **▶ Run Code** - Execute the code immediately
-   - **✕ Clear Output** - Clear the console
-   - **↻ Reset** - Restore the default example
+---
 
-### 3. **Output Console (Right Panel)**
-   - Terminal-style output display
-   - Shows results from `print()` statements
-   - Displays error messages in red
-   - Auto-scrolls to new output
+## ⌨️ Keyboard Shortcuts
 
-## 🧪 Quick Tests
+- **Ctrl+Enter** - Run code
+- **Tab** - Indent
+- **Ctrl+/** - Toggle comment
 
-### Test 1: Hello World
-Replace the editor code with:
-```nova
-print("Hello from NovaScript Web IDE!")
-```
-Click **Run Code** → You should see: `Hello from NovaScript Web IDE!`
+---
 
-### Test 2: Variables and Arithmetic
+## 🧪 Code Examples
+
+### Example 1: Variables & Arithmetic
 ```nova
 var x = 10
 var y = 20
 print("Sum: " + (x + y))
 print("Product: " + (x * y))
 ```
-Click **Run Code** → Output:
-```
-Sum: 30
-Product: 200
-```
 
-### Test 3: Functions
+### Example 2: Functions
 ```nova
 function add(a, b):
 {
@@ -61,17 +52,8 @@ function add(a, b):
 var result = add(5, 7)
 print("5 + 7 = " + result)
 ```
-Click **Run Code** → Output: `5 + 7 = 12`
 
-### Test 4: Loops
-```nova
-for (var i = 1 : i <= 5 : i = i + 1): {
-    print("Square of " + i + " = " + (i * i))
-}
-```
-Click **Run Code** → Output shows squares from 1 to 25
-
-### Test 5: Conditionals
+### Example 3: Conditionals
 ```nova
 var score = 85
 if (score >= 90): {
@@ -82,22 +64,83 @@ if (score >= 90): {
     }
 }
 ```
-Click **Run Code** → Output: `Grade: B`
 
-## ⌨️ Keyboard Shortcuts
+### Example 4: For Loop
+```nova
+for (var i = 1 : i <= 5 : i = i + 1): {
+    print("i = " + i)
+}
+```
 
-- **Ctrl+Enter** (Windows/Linux) or **Cmd+Enter** (Mac) - Run code
-- Use Tab key for auto-indentation
-- Use Ctrl+/ to comment/uncomment lines (CodeMirror feature)
+### Example 5: While Loop
+```nova
+var count = 0
+while (count < 3): {
+    print("Count: " + count)
+    count = count + 1
+}
+```
 
-## 🔍 How It Works
+### Example 6: Fibonacci Function
+```nova
+function fib(n):
+{
+    if (n <= 1): {
+        return n
+    }
+    return fib(n - 1) + fib(n - 2)
+}
 
-### Frontend → Backend Communication
+print("Fibonacci(7) = " + fib(7))
+```
 
-1. You write code in the editor
-2. Click "Run Code" or press Ctrl+Enter
-3. Browser sends code to backend via AJAX POST request
-4. Flask server receives the code
+---
+
+## 🎓 NovaScript Language Features
+
+### Keywords
+- `var` - Variable declaration
+- `function` - Function definition
+- `print` - Output to console
+- `if` / `else` - Conditionals
+- `for` / `while` - Loops
+- `return` - Return from function
+
+### Operators
+- **Arithmetic**: `+`, `-`, `*`, `/`, `%`
+- **Comparison**: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- **Logical**: `and`, `or`, `!`
+
+### Comments
+```nova
+# This is a comment
+```
+
+---
+
+## 💻 How It Works
+
+1. **Frontend** (Browser)
+   - CodeMirror editor for code input
+   - AJAX to send code to backend
+
+2. **Backend** (Flask)
+   - Receives code via POST request
+   - Lexer tokenizes the code
+   - Parser builds syntax tree
+   - Executor runs the program
+
+3. **Output**
+   - Captured and sent back as JSON
+   - Displayed in browser console
+
+---
+
+## 📚 Full Documentation
+
+- `GETTING_STARTED.md` - 3-step setup
+- `COMPLETE_SETUP_GUIDE.md` - Comprehensive setup & troubleshooting
+- `README.md` - Language reference
 5. NovaScript interpreter (Lexer → Parser → Executor) processes it
 6. Output is captured and returned as JSON
 7. Browser displays results in the console
