@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaScript IDE - Web-based Programming Environment</title>
+    
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <span class="logo-icon">◆</span>
+                    NovaScript IDE
+                </h1>
+                <p class="tagline">A Modern Web-Based Programming Environment</p>
+            </div>
+            <div class="header-buttons">
+                <button id="runBtn" class="btn btn-primary" title="Run code (Ctrl+Enter)">
+                    <span class="btn-icon">▶</span> Run Code
+                </button>
+                <button id="clearBtn" class="btn btn-secondary" title="Clear output console">
+                    <span class="btn-icon">✕</span> Clear Output
+                </button>
+                <button id="resetBtn" class="btn btn-secondary" title="Reset editor to default">
+                    <span class="btn-icon">↻</span> Reset
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="editor-section">
+                <div class="section-header">
+                    <h2>Code Editor</h2>
+                    <span class="section-info">Write your NovaScript code here</span>
+                </div>
+                <!-- CodeMirror Editor -->
+                <textarea id="codeEditor" class="code-editor"></textarea>
+            </div>
+
+            <div class="console-section">
+                <div class="section-header">
+                    <h2>Output Console</h2>
+                    <span class="section-info">Program output and errors appear here</span>
+                </div>
+                <!-- Console Output -->
+                <div id="console" class="console">
+                    <div class="console-line console-welcome">
+                        Welcome to NovaScript IDE! Click "Run Code" or press Ctrl+Enter to execute.
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>NovaScript IDE v1.0 | 
+               <a href="https://github.com/PixelStudio330/NovaScript" target="_blank">GitHub Repository</a> |
+               <span id="status" class="status">Ready</span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/display/autorefresh.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
