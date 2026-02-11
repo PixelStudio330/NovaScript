@@ -57,7 +57,6 @@ class Lexer:
         'in': 'IN',
         'True': 'TRUE',
         'False': 'FALSE',
-        'require': 'REQUIRE',
     }
     
     def __init__(self, source: str):
@@ -784,6 +783,10 @@ class Executor:
         name = expr['name']
         args = [self.evaluate_expression(arg) for arg in expr['args']]
         
+        # Handle built-in require() function
+        if name == 'require':
+            return self.builtin_require(args)
+        
         # Look up function
         if name not in self.global_scope:
             raise NameError(f"Undefined function: {name}")
@@ -818,6 +821,65 @@ class Executor:
             self.local_scope = prev_local
         
         return result
+    
+    def builtin_require(self, args: List[Any]) -> Dict[str, Any]:
+        """
+        Built-in require() function to load standard library modules.
+        
+        Usage:
+            var fs = require("fs")
+            var math = require("math")
+            var console = require("console")
+            var random = require("random")
+            var date = require("date")
+            var http = require("http")
+        
+        Args:
+            args: List containing module name as string
+            
+        Returns:
+            Dict with module functions and constants
+        """
+        if len(args) != 1:
+            raise TypeError(f"require() takes exactly 1 argument ({len(args)} given)")
+        
+        module_name = args[0]
+        
+        if not isinstance(module_name, str):
+            raise TypeError(f"Module name must be a string, not {type(module_name).__name__}")
+        
+        # Load module from stdlib
+        try:
+            if module_name == 'fs':
+                from nova.stdlib.fs import create_module
+                return create_module()
+            
+            elif module_name == 'console':
+                from nova.stdlib.console import create_module
+                return create_module()
+            
+            elif module_name == 'math':
+                from nova.stdlib.math import create_module
+                return create_module()
+            
+            elif module_name == 'random':
+                from nova.stdlib.random import create_module
+                return create_module()
+            
+            elif module_name == 'date':
+                from nova.stdlib.date import create_module
+                return create_module()
+            
+            elif module_name == 'http':
+                from nova.stdlib.http import create_module
+                return create_module()
+            
+            else:
+                raise ModuleNotFoundError(f"No module named '{module_name}'. "
+                                         f"Available modules: fs, console, math, random, date, http")
+        
+        except ImportError as e:
+            raise ModuleNotFoundError(f"Failed to load module '{module_name}': {str(e)}")
     
     def is_truthy(self, value: Any) -> bool:
         """Determine if a value is truthy."""

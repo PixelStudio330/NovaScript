@@ -1,0 +1,65 @@
+# Standard Library Demo
+# 
+# NOTE: This example demonstrates the require() function which is now
+# implemented. However, member access (dot notation) like math.sqrt() is
+# not yet supported in NovaScript v1.0.
+#
+# Member access will be implemented in v1.1+ along with object support.
+# 
+# For now, you can still load modules with require(), but you'll need
+# to use the returned functions differently.
+#
+# Example (after v1.1):
+#   var math = require("math")
+#   print(math.sqrt(16))
+#
+# Current workaround: Use direct function calls or wait for v1.1
+
+print("=== NovaScript Standard Library (v1.0) ===")
+print("")
+
+print("Module require() function is available!")
+print("")
+print("Available modules (use in v1.1 with member access):")
+print("- fs: File system operations")
+print("- console: Logging and output")
+print("- math: Mathematical functions")
+print("- random: Random number generation")
+print("- date: Date and time operations")
+print("- http: HTTP requests")
+print("")
+print("Example (v1.1+):")
+print('  var math = require("math")')
+print('  print(math.sqrt(16))  # Prints: 4.0')
+print("")
+print("For now, use core language features:")
+
+# Show what's available in v1.0
+print("")
+print("=== Core Language Features ===")
+
+# Functions
+function add(a, b):
+{
+    return a + b
+}
+
+print("Function: add(10, 20) = " + add(10, 20))
+
+# Loops
+print("For loop example:")
+for (var i = 1 : i <= 3 : i = i + 1): {
+    print("  i = " + i)
+}
+
+# Conditionals
+var x = 5
+if (x > 0): {
+    print("x is positive")
+} else: {
+    print("x is not positive")
+}
+
+print("")
+print("Typeinformation: Ready for v1.1 with member access and objects!")
+
