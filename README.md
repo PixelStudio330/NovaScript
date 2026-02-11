@@ -213,6 +213,48 @@ if (score >= 90): {
 }
 ```
 
+## Project File Structure
+
+### Core Interpreter
+- **[nova_interpreter.py](nova_interpreter.py)** (893 lines)
+  - `Lexer` class: Tokenizes source code, handles keywords, operators, strings, numbers
+  - `Parser` class: Recursive descent parser, builds abstract syntax tree (AST)
+  - `Executor` class: Executes AST, manages scopes, evaluates expressions
+  - REPL mode for interactive execution
+
+### Web IDE Backend
+- **[server.py](server.py)** (152 lines)
+  - Flask web server configuration
+  - `GET /` route: Serves the IDE interface (index.html)
+  - `POST /api/execute` route: Receives code, executes it, captures output, returns JSON
+  - `GET /api/highlight-keywords` route: Returns language keywords for syntax highlighting
+  - Error handling and output capture with `io.StringIO`
+
+### Web IDE Frontend
+- **[templates/index.html](templates/index.html)**
+  - CodeMirror 5 editor integration for syntax highlighting
+  - Dark theme styling
+  - Output console for displaying results
+  - Buttons: Run Code (Ctrl+Enter), Clear, Reset
+  - AJAX communication with Flask backend
+
+- **[static/style.css](static/style.css)** (700+ lines)
+  - Professional dark theme (GitHub dark mode inspired)
+  - CSS variables for theming and layout control
+  - Responsive grid layout (editor + console)
+  - Terminal-style console output styling
+
+- **[static/script.js](static/script.js)** (300+ lines)
+  - CodeMirror editor initialization and configuration
+  - AJAX request/response handling for code execution
+  - Console message formatting and display
+  - Event listeners for Run, Clear, Reset buttons
+  - Keyboard shortcuts (Ctrl+Enter to run)
+
+### Configuration Files
+- **requirements.txt**: Python dependencies (Flask==2.3.3, Werkzeug==2.3.7)
+- **test.nova**: Sample NovaScript program for testing
+
 ## Extending the Interpreter
 
 The modular design makes it easy to add new features:
