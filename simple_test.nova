@@ -1,0 +1,11 @@
+# Simple test
+print("Hello, World")
+
+var x = 10
+print("x = " + x)
+
+function add(a, b):
+    return a + b
+
+var result = add(5, 3)
+print("5 + 3 = " + result)

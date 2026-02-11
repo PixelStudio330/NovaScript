@@ -1,0 +1,82 @@
+# NovaScript Example Program
+# Demonstrates variables, functions, loops, conditionals, and arithmetic
+
+# Basic variables and arithmetic
+var x = 10
+var y = 20
+var sum = x + y
+print("Sum: " + sum)
+
+# Simple function
+function greet(name):
+{
+    print("Hello, " + name)
+}
+
+greet("World")
+
+
+# Function with return values
+function add(a, b):
+    return a + b
+
+var result = add(5, 3)
+print("5 + 3 = " + result)
+
+
+# Conditional statements
+var age = 25
+if (age >= 18): {
+    print("You are an adult")
+} else: {
+    print("You are a minor")
+}
+
+
+# While loop
+var count = 1
+while (count <= 3): {
+    print("Count: " + count)
+    count = count + 1
+}
+
+
+# For loop
+print("For loop from 1 to 5:")
+for (var i = 1 : i <= 5 : i = i + 1): {
+    print("i = " + i)
+}
+
+
+# More complex example
+function fibonacci(n):
+{
+    if (n <= 1): {
+        return n
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+print("Fibonacci(7) = " + fibonacci(7))
+
+
+# Working with strings
+var greeting = "NovaScript"
+print("Language: " + greeting)
+
+
+# Boolean operations
+var isReady = True
+if (isReady):
+    print("System is ready!")
+
+
+# Arithmetic operations
+var num = 10
+print("10 * 2 = " + num * 2)
+print("20 / 4 = " + 20 / 4)
+print("17 % 5 = " + 17 % 5)
+
+
+# Final message
+print("NovaScript interpreter test completed!")

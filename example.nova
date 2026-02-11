@@ -1,0 +1,9 @@
+# Simple greeting example
+var x = 10
+
+function greet(name):
+{
+    print("Hello, " + name)
+}
+
+greet("World")
