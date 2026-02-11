@@ -1,0 +1,16 @@
+README.md
+setup.py
+nova/__init__.py
+nova/interpreter.py
+nova/stdlib/__init__.py
+nova/stdlib/console.py
+nova/stdlib/date.py
+nova/stdlib/fs.py
+nova/stdlib/http.py
+nova/stdlib/math.py
+nova/stdlib/random.py
+nova_script.egg-info/PKG-INFO
+nova_script.egg-info/SOURCES.txt
+nova_script.egg-info/dependency_links.txt
+nova_script.egg-info/entry_points.txt
+nova_script.egg-info/top_level.txt

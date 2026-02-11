@@ -98,7 +98,8 @@ function getGrade(score):
     }
 }
 
-var scores = [95, 87, 73, 65]
+# Note: Array literals not yet supported
+# var scores = [95, 87, 73, 65]
 var s1 = 95
 print("Score " + s1 + " → Grade: " + getGrade(s1))
 
