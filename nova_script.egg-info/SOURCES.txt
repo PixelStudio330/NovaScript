@@ -2,6 +2,7 @@ README.md
 setup.py
 nova/__init__.py
 nova/interpreter.py
+nova/nova_cli.py
 nova/stdlib/__init__.py
 nova/stdlib/console.py
 nova/stdlib/date.py

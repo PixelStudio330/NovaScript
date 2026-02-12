@@ -1,376 +1,172 @@
-# NovaScript - A Lightweight Programming Language Runtime
+# NovaScript-X - A Lightweight Programming Language Runtime
 
 A Python-based interpreter for the NovaScript programming language, designed as a modern, lightweight alternative to Node.js. Write full-stack applications with a unified language runtime.
 
+**Package Name**: `novascript-x`  
+**CLI Command**: `novax`  
 **Current Version**: 1.0.0  
-**Status**: Beta (Core language features complete, web runtime in development)
+**Status**: Beta (Core language features complete, web runtime in development)  
+**License**: MIT
+
+---
+
+## Table of Contents
+
+1. [Quick Start](#-quick-start)
+2. [Getting Started](#-getting-started)
+3. [Language Features](#-language-features)
+4. [CLI Commands](#️-cli-commands)
+5. [Standard Library](#-standard-library)
+6. [Examples](#-examples)
+7. [Troubleshooting](#-troubleshooting)
+8. [Project Structure](#-project-structure)
+9. [Contributing](#-contributing)
+
+---
 
 ## 🚀 Quick Start
 
 ### Installation
 
-Install NovaScript globally via pip:
-
 ```bash
-# Clone or navigate to the NovaScript directory
+# From PyPI (recommended)
+pip install novascript-x
+
+# Or from source (development mode)
+git clone https://github.com/YourRepo/NovaScript-X.git
 cd NovaScript
-
-# Install in development mode (creates 'nova' command)
 pip install -e .
-
-# Or install from current directory
-pip install .
 ```
 
-After installation, the `nova` command will be available globally on your system.
+### Your First Program
 
-### Run Your First Program
-
-Create a file called `hello.nova`:
+Create `hello.nova`:
 
 ```nova
-print("Hello, Nova!")
-
 var name = "World"
-print("Welcome to " + name)
+print("Hello, " + name)
 ```
 
 Run it:
 
 ```bash
-nova hello.nova
+novax hello.nova
+# Output: Hello, World
 ```
 
 ### Interactive REPL
 
-Start the interactive interpreter:
+Start an interactive session:
 
 ```bash
-nova
+novax
+# nova> var x = 10
+# nova> print(x * 2)
+# 20
+# nova> exit
 ```
 
-Type NovaScript code and see results instantly:
+---
 
-```
-nova> var x = 10
-nova> print(x + 5)
-15
-nova> exit
-```
+## 📚 Getting Started
 
-## 📖 Language Features
-
-### Variables
+### 1. Variables and Basic Operations
 
 ```nova
+# Declare variables with var
 var name = "Alice"
-var age = 25
-var pi = 3.14159
+var age = 30
+var score = 95.5
+var active = True
+
+# Arithmetic operations
+var sum = 10 + 5
+var product = 4 * 3
+var result = 20 / 4
+
+# String concatenation
+var message = "Hello, " + name
+print(message)
+
+# Output: Hello, Alice
 ```
 
-### Functions
+### 2. Control Flow - If/Else
 
 ```nova
-function greet(person):
-{
-    print("Hello, " + person)
+var temperature = 25
+
+if (temperature > 30): {
+    print("It's hot!")
+} else: {
+    if (temperature > 15): {
+        print("It's pleasant")
+    } else: {
+        print("It's cold")
+    }
 }
 
-greet("Bob")
+# Output: It's pleasant
+```
+
+### 3. Loops - While
+
+```nova
+var countdown = 3
+
+while (countdown > 0): {
+    print(countdown)
+    countdown = countdown - 1
+}
+
+print("Blastoff!")
+
+# Output:
+# 3
+# 2
+# 1
+# Blastoff!
+```
+
+### 4. Loops - For
+
+```nova
+for (var i = 1 : i <= 5 : i = i + 1): {
+    print("Iteration: " + i)
+}
+
+# Output:
+# Iteration: 1
+# Iteration: 2
+# Iteration: 3
+# Iteration: 4
+# Iteration: 5
+```
+
+### 5. Functions
+
+```nova
+function greet(name, title):
+{
+    print("Hello, " + title + " " + name)
+}
+
+greet("Smith", "Dr")
+# Output: Hello, Dr Smith
 
 function add(a, b):
 {
     return a + b
 }
 
-var sum = add(3, 5)
+var total = add(5, 3)
+print("Total: " + total)
+# Output: Total: 8
 ```
 
-### Control Flow
+### 6. Recursion
 
 ```nova
-# If / Else
-if (age >= 18): {
-    print("Adult")
-} else: {
-    print("Minor")
-}
-
-# While loop
-var count = 0
-while (count < 5): {
-    print(count)
-    count = count + 1
-}
-
-# For loop
-for (var i = 1 : i <= 5 : i = i + 1): {
-    print("Number: " + i)
-}
-```
-
-### Operators
-
-- **Arithmetic**: `+`, `-`, `*`, `/`, `%`
-- **Comparison**: `==`, `!=`, `<`, `>`, `<=`, `>=`
-- **Logical**: `and`, `or`, `!`
-
-### Advanced Features
-
-- **Recursion**
-- **String concatenation** with automatic type coercion
-- **Comments** with `#`
-
-## 🛠️ CLI Commands
-
-The `nova` command supports various options:
-
-### Run a Script
-
-```bash
-nova script.nova
-```
-
-### Interactive REPL
-
-```bash
-nova
-```
-
-### Watch Mode (Auto-run on Changes)
-
-```bash
-nova --watch script.nova
-# or
-nova -w script.nova
-```
-
-### Execute Code Inline
-
-```bash
-nova -c 'print("Hello Nova")'
-```
-
-### Debug Mode
-
-```bash
-nova --debug script.nova
-```
-
-### Show Version
-
-```bash
-nova --version
-# or
-nova -v
-```
-
-### Display Help
-
-```bash
-nova --help
-# or
-nova -h
-```
-
-## 📦 Standard Library (In Development)
-
-NovaScript includes a standard library for common tasks. Import modules using `require()`:
-
-### Available Modules
-
-#### `fs` - File System
-
-```nova
-var fs = require("fs")
-
-# Write to file
-fs.writeFile("test.txt", "Hello")
-
-# Read from file
-var content = fs.readFile("test.txt")
-
-# Check if file exists
-if (fs.fileExists("test.txt")): {
-    print("File exists")
-}
-```
-
-#### `console` - Logging
-
-```nova
-var console = require("console")
-
-console.log("Regular message")
-console.warn("Warning!")
-console.error("Error occurred")
-console.info("Info")
-console.debug("Debug message")
-```
-
-#### `math` - Mathematics
-
-```nova
-var math = require("math")
-
-print(math.sqrt(16))        # 4.0
-print(math.pow(2, 3))       # 8
-print(math.abs(-5))         # 5
-print(math.floor(4.7))      # 4
-print(math.pi)              # 3.14159...
-```
-
-#### `random` - Random Numbers
-
-```nova
-var random = require("random")
-
-var n = random.randInt(1, 100)      # Random int 1-100
-var f = random.randFloat()           # Random 0.0-1.0
-```
-
-#### `date` - Date/Time
-
-```nova
-var date = require("date")
-
-print(date.now())           # Current timestamp
-print(date.format("%Y-%m-%d"))   # Formatted date
-print(date.addDays(5))      # Date 5 days from now
-```
-
-#### `http` - HTTP Requests
-
-```nova
-var http = require("http")
-
-# GET request
-var response = http.get("https://api.example.com/data")
-
-# POST request
-var result = http.post("https://api.example.com", {key: "value"})
-```
-
-## 📂 Project Structure
-
-```
-nova/
-├── __init__.py              # Package initialization
-├── interpreter.py           # Core language interpreter
-│   ├── Lexer              # Tokenizes source code
-│   ├── Parser             # Builds AST
-│   └── Executor           # Executes code
-└── stdlib/                  # Standard library
-    ├── fs.py              # File system
-    ├── console.py         # Logging
-    ├── math.py            # Math functions
-    ├── random.py          # Random numbers
-    ├── date.py            # Date/time
-    └── http.py            # HTTP requests
-
-nova_cli.py                 # Command-line interface
-setup.py                    # Installation configuration
-examples/                   # Example programs
-```
-
-## 🚀 Examples
-
-See the `examples/` directory for complete working programs:
-
-1. **hello_world/** - Basic variables and printing
-2. **functions_loops/** - Functions, loops, recursion, and conditions
-
-Run examples:
-
-```bash
-nova examples/hello_world/main.nova
-nova examples/functions_loops/main.nova
-```
-
-## 🔧 Features & Roadmap
-
-### ✅ Completed (v1.0)
-
-- [x] Core language interpreter (Lexer, Parser, Executor)
-- [x] CLI with argparse support
-- [x] Watch mode for development
-- [x] Standard library modules (fs, console, math, random, date, http)
-- [x] REPL mode
-- [x] Cross-platform (Windows, macOS, Linux)
-- [x] pip installation support
-
-### 🚧 In Development
-
-- [ ] `require()` function for module imports
-- [ ] Web server/HTTP routing support
-- [ ] Web framework with `nova create` scaffold
-- [ ] Server-side rendering
-- [ ] Hot reloading
-
-### 📋 Planned (v1.1+)
-
-- [ ] Array/List support
-- [ ] Object/Dictionary support
-- [ ] Classes and OOP
-- [ ] Async/await
-- [ ] Package manager
-- [ ] Type system
-- [ ] Testing framework
-- [ ] Build tools
-
-## 🎓 Tutorial & Documentation
-
-### Your First Program
-
-Create `script.nova`:
-
-```nova
-# Variables and printing
-var greeting = "Welcome to NovaScript"
-print(greeting)
-
-# Functions
-function multiply(a, b):
-{
-    return a * b
-}
-
-# Using the function
-var result = multiply(6, 7)
-print("6 * 7 = " + result)
-
-# Loops
-for (var i = 1 : i <= 3 : i = i + 1): {
-    print("Iteration " + i)
-}
-```
-
-Run it:
-
-```bash
-nova script.nova
-```
-
-### Conditionals
-
-```nova
-var score = 85
-
-if (score >= 90): {
-    print("Grade A")
-} else: {
-    if (score >= 80): {
-        print("Grade B")
-    } else: {
-        print("Grade C")  
-    }
-}
-```
-
-### Recursion
-
-```nova
-# Calculate factorial
 function factorial(n):
 {
     if (n <= 1): {
@@ -379,263 +175,276 @@ function factorial(n):
     return n * factorial(n - 1)
 }
 
-print(factorial(5))  # 120
+print("5! = " + factorial(5))
+# Output: 5! = 120
 ```
 
-## 🔌 Web Runtime (Coming Soon)
-
-In future versions, run NovaScript as an HTTP server:
-
-```bash
-# Start web server
-nova --serve app.nova
-
-# app.nova
-function handleRequest(req, res):
-{
-    res.send("Hello from NovaScript!")
-}
-```
-
-## 🐛 Troubleshooting
-
-### Command not found: nova
-
-Make sure you installed NovaScript:
-
-```bash
-pip install -e .
-```
-
-Verify installation:
-
-```bash
-which nova
-nova --version
-```
-
-### Import errors
-
-Make sure you're in the correct directory and the nova package is properly installed:
-
-```bash
-pip install -e .
-python -c "import nova; print(nova.__version__)"
-```
-
-### File not found
-
-Use absolute paths or relative paths from your current directory:
-
-```bash
-# Absolute path
-nova /full/path/to/script.nova
-
-# Relative path
-nova ./scripts/script.nova
-```
-
-## 📄 License
-
-MIT License - See LICENSE file for details
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues and pull requests.
-
-## 📞 Support
-
-For issues and questions:
-- Open an issue on GitHub
-- Check documentation in `examples/` directory
-- Review test files in `tests/` directory
-
-## 🎉 Acknowledgments
-
-NovaScript is inspired by Node.js, Python, and JavaScript, bringing together the best features of modern runtimes into a lightweight, easy-to-learn language.
-
-## Features
-
-- **Variables**: Declare variables with `var`
-- **Functions**: Create functions with `function` keyword and `return` statements
-- **Print**: Output values with `print()`
-- **Conditionals**: `if`/`else` statements with boolean logic
-- **Loops**: `while` and `for` loops
-- **Arithmetic**: Full arithmetic operations (+, -, *, /, %)
-- **String Concatenation**: Use `+` operator to concatenate strings
-- **Operators**: Comparison (==, !=, <, >, <=, >=), logical (and, or), unary (!, -)
-
-## Usage
-
-### Running a NovaScript File
-
-```bash
-python nova_interpreter.py program.nova
-```
-
-### Interactive REPL Mode
-
-```bash
-python nova_interpreter.py
-```
-
-Then type NovaScript commands at the `nova>` prompt. Type `exit` to quit.
-
-## Syntax
-
-### Variables
+### 7. Using the Standard Library
 
 ```nova
-var name = value
-var x = 10
-var greeting = "Hello"
+# Math operations
+var math = require("math")
+print(math.sqrt(16))          # 4.0
+print(math.sqrt(25))          # 5.0
+print(math.pow(2, 3))         # 8
+print(math.abs(-5))           # 5
+print(math.pi)                # 3.14159...
+
+# File operations
+var fs = require("fs")
+fs.writeFile("greeting.txt", "Hello, NovaScript!")
+var content = fs.readFile("greeting.txt")
+print(content)
+
+# Random numbers
+var random = require("random")
+var dice = random.randInt(1, 6)
+print("Dice roll: " + dice)
+
+# Date/time
+var date = require("date")
+var now = date.now()
+print("Current timestamp: " + now)
 ```
 
-### Functions
+---
 
-```nova
-function functionName(param1, param2):
-{
-    # Function body
-    return result
-}
-```
+## 📖 Language Features
 
-Example:
-```nova
-function add(a, b):
-{
-    return a + b
-}
+### Data Types
 
-var result = add(5, 3)
-print("Result: " + result)  # Output: Result: 8
-```
+- **Numbers**: `10`, `3.14`, `-5`
+- **Strings**: `"hello"`, `'world'`
+- **Booleans**: `True`, `False`
+- **Null**: `None` (nil value)
 
-### Print Statement
+### Operators
 
-```nova
-print("Hello, World")
-print("Value: " + x)
-print("Sum: " + (5 + 3))
-```
+#### Arithmetic
+- `+` Addition / String concatenation
+- `-` Subtraction
+- `*` Multiplication
+- `/` Division
+- `%` Modulo (remainder)
 
-### Conditionals
+#### Comparison
+- `==` Equal to
+- `!=` Not equal to
+- `<` Less than
+- `>` Greater than
+- `<=` Less than or equal to
+- `>=` Greater than or equal to
 
-```nova
-if (condition): {
-    # Then body
-} else: {
-    # Else body
-}
-```
-
-Example:
-```nova
-var age = 25
-if (age >= 18): {
-    print("Adult")
-} else: {
-    print("Minor")
-}
-```
-
-### While Loop
-
-```nova
-while (condition): {
-    # Loop body
-}
-```
-
-Example:
-```nova
-var count = 1
-while (count <= 3): {
-    print("Count: " + count)
-    count = count + 1
-}
-```
-
-### For Loop
-
-```nova
-for (init : condition : update): {
-    # Loop body
-}
-```
-
-Example:
-```nova
-for (var i = 1 : i <= 5 : i = i + 1): {
-    print("i = " + i)
-}
-```
-
-### Arithmetic Operators
-
-- `+`: Addition and string concatenation
-- `-`: Subtraction
-- `*`: Multiplication
-- `/`: Division (integer division for integers)
-- `%`: Modulo
-
-### Comparison Operators
-
-- `==`: Equal to
-- `!=`: Not equal to
-- `<`: Less than
-- `>`: Greater than
-- `<=`: Less than or equal to
-- `>=`: Greater than or equal to
-
-### Logical Operators
-
-- `and`: Logical AND
-- `or`: Logical OR
-- `!`: Logical NOT
+#### Logical
+- `and` Logical AND
+- `or` Logical OR
+- `!` Logical NOT
 
 ### Comments
 
 ```nova
 # This is a comment
+# Everything after # is ignored
 ```
 
-## Interpreter Architecture
+### Advanced Features
 
-The interpreter is modular with three main components:
+- **Member Access**: `math.sqrt(16)` (for module functions)
+- **Recursion**: Functions can call themselves
+- **Type Coercion**: Automatic type conversion in string concatenation
 
-1. **Lexer**: Tokenizes NovaScript source code
-   - Recognizes keywords, operators, literals, and identifiers
-   - Handles string literals with escape sequences
-   - Produces a stream of Token objects
+---
 
-2. **Parser**: Parses tokens into an abstract syntax tree (AST)
-   - Implements recursive descent parsing with operator precedence
-   - Produces a list of statement dictionaries
-   - Handles all NovaScript language constructs
+## 🛠️ CLI Commands
 
-3. **Executor**: Executes the parsed AST
-   - Manages global and local scope
-   - Evaluates expressions and executes statements
-   - Handles function calls and returns
+### Run a Script
 
-## Example Program
+```bash
+novax script.nova
+```
+
+### Interactive REPL
+
+```bash
+novax
+# or
+novax --repl
+```
+
+### Watch Mode (Auto-reload)
+
+```bash
+novax --watch script.nova
+# or
+novax -w script.nova
+
+# Now the script re-runs whenever you save it
+```
+
+### Run Code Inline
+
+```bash
+novax -c 'print("Hello from NovaScript-X")'
+```
+
+### Debug Mode
+
+```bash
+novax --debug script.nova
+```
+
+### Show Version
+
+```bash
+novax --version
+# or
+novax -v
+
+# Output: NovaScript-X 1.0.0
+```
+
+### Display Help
+
+```bash
+novax --help
+# or
+novax -h
+```
+
+---
+
+## 📦 Standard Library
+
+NovaScript includes a comprehensive standard library for common tasks.
+
+### Math Module
 
 ```nova
-# Variables
-var name = "NovaScript"
-print("Language: " + name)
+var math = require("math")
+
+# Constants
+print(math.pi)          # 3.14159...
+print(math.e)           # 2.71828...
 
 # Functions
-function greet(person):
+print(math.sqrt(16))    # 4.0
+print(math.pow(2, 3))   # 8
+print(math.abs(-5))     # 5
+print(math.floor(3.7))  # 3
+print(math.ceil(3.2))   # 4
+print(math.round(3.5))  # 4.0
+
+# Trigonometry
+print(math.sin(0))      # 0.0
+print(math.cos(0))      # 1.0
+print(math.tan(0))      # 0.0
+```
+
+### File System Module
+
+```nova
+var fs = require("fs")
+
+# Write to file
+fs.writeFile("output.txt", "Hello, World!")
+
+# Read from file
+var content = fs.readFile("output.txt")
+print(content)
+
+# Delete file
+fs.deleteFile("output.txt")
+
+# Check if file exists
+if (fs.fileExists("script.nova")): {
+    print("File exists")
+}
+```
+
+### Console Module
+
+```nova
+var console = require("console")
+
+# Logging
+console.log("Info message")
+console.warn("Warning message")
+console.error("Error message")
+```
+
+### Random Module
+
+```nova
+var random = require("random")
+
+# Random integers
+var dice = random.randInt(1, 6)
+
+# Random floating-point
+var float = random.randFloat()
+
+# Choose from list
+var choice = random.choice([1, 2, 3, 4, 5])
+
+# Set seed for reproducibility
+random.seed(42)
+```
+
+### Date/Time Module
+
+```nova
+var date = require("date")
+
+# Get current timestamp
+var now = date.now()
+
+# Format date
+var formatted = date.format("YYYY-MM-DD")
+
+# Get year, month, day
+var year = date.getYear()
+var month = date.getMonth()
+var day = date.getDay()
+
+# Add days to a date
+var tomorrow = date.addDays(1)
+```
+
+### HTTP Module
+
+```nova
+var http = require("http")
+
+# GET request
+var response = http.get("https://api.example.com/data")
+
+# POST request
+var data = http.post("https://api.example.com/data", "{\"key\": \"value\"}")
+```
+
+---
+
+## 💡 Examples
+
+### Example 1: Sum Calculator
+
+```nova
+function sum(n):
 {
-    print("Hello, " + person)
+    var total = 0
+    for (var i = 1 : i <= n : i = i + 1): {
+        total = total + i
+    }
+    return total
 }
 
-greet("World")
+print("Sum of 1 to 10: " + sum(10))
+# Output: Sum of 1 to 10: 55
+```
 
-# Fibonacci with recursion
+### Example 2: Fibonacci Sequence
+
+```nova
 function fibonacci(n):
 {
     if (n <= 1): {
@@ -644,90 +453,237 @@ function fibonacci(n):
     return fibonacci(n - 1) + fibonacci(n - 2)
 }
 
-print("Fibonacci(7) = " + fibonacci(7))
-
-# Loops
-for (var i = 1 : i <= 5 : i = i + 1): {
-    var square = i * i
-    print("Square of " + i + " = " + square)
+for (var i = 0 : i < 10 : i = i + 1): {
+    print(fibonacci(i))
 }
 
-# Conditionals
-var score = 85
-if (score >= 90): {
-    print("Grade: A")
-} else: {
-    if (score >= 80): {
-        print("Grade: B")
-    } else: {
-        print("Grade: C")
-    }
-}
+# Output:
+# 0
+# 1
+# 1
+# 2
+# 3
+# 5
+# 8
+# 13
+# 21
+# 34
 ```
 
-## Project File Structure
+### Example 3: File Processing
 
-### Core Interpreter
-- **[nova_interpreter.py](nova_interpreter.py)** (893 lines)
-  - `Lexer` class: Tokenizes source code, handles keywords, operators, strings, numbers
-  - `Parser` class: Recursive descent parser, builds abstract syntax tree (AST)
-  - `Executor` class: Executes AST, manages scopes, evaluates expressions
-  - REPL mode for interactive execution
+```nova
+var fs = require("fs")
 
-### Web IDE Backend
-- **[server.py](server.py)** (152 lines)
-  - Flask web server configuration
-  - `GET /` route: Serves the IDE interface (index.html)
-  - `POST /api/execute` route: Receives code, executes it, captures output, returns JSON
-  - `GET /api/highlight-keywords` route: Returns language keywords for syntax highlighting
-  - Error handling and output capture with `io.StringIO`
+# Create a file with content
+fs.writeFile("numbers.txt", "1\n2\n3\n4\n5")
 
-### Web IDE Frontend
-- **[templates/index.html](templates/index.html)**
-  - CodeMirror 5 editor integration for syntax highlighting
-  - Dark theme styling
-  - Output console for displaying results
-  - Buttons: Run Code (Ctrl+Enter), Clear, Reset
-  - AJAX communication with Flask backend
+# Read and display
+var content = fs.readFile("numbers.txt")
+print("File content:")
+print(content)
+```
 
-- **[static/style.css](static/style.css)** (700+ lines)
-  - Professional dark theme (GitHub dark mode inspired)
-  - CSS variables for theming and layout control
-  - Responsive grid layout (editor + console)
-  - Terminal-style console output styling
+### Example 4: Using Multiple Modules
 
-- **[static/script.js](static/script.js)** (300+ lines)
-  - CodeMirror editor initialization and configuration
-  - AJAX request/response handling for code execution
-  - Console message formatting and display
-  - Event listeners for Run, Clear, Reset buttons
-  - Keyboard shortcuts (Ctrl+Enter to run)
+```nova
+var math = require("math")
+var random = require("random")
+var console = require("console")
 
-### Configuration Files
-- **requirements.txt**: Python dependencies (Flask==2.3.3, Werkzeug==2.3.7)
-- **test.nova**: Sample NovaScript program for testing
+# Generate random numbers and calculate stats
+var num1 = random.randInt(1, 100)
+var num2 = random.randInt(1, 100)
 
-## Extending the Interpreter
+var min = math.min(num1, num2)
+var max = math.max(num1, num2)
 
-The modular design makes it easy to add new features:
+console.log("Number 1: " + num1)
+console.log("Number 2: " + num2)
+console.log("Minimum: " + min)
+console.log("Maximum: " + max)
+```
 
-1. **Add Keywords**: Add to `Lexer.KEYWORDS` and create a parse method
-2. **Add Operators**: Extend the binary/unary operator parsing and evaluation
-3. **Add Data Types**: Add new value types to the executor
-4. **Add Built-in Functions**: Add to the executor for built-in functions
+---
 
-## Limitations
+## 🐛 Troubleshooting
 
-- Requires braces for multi-statement blocks (indentation-based syntax can be added)
-- No array/list support yet (can be added)
-- No object/dictionary support yet (can be added)
-- No file I/O support yet (can be added)
-- No module/import system yet (can be added)
+### Error: "novax: command not found"
 
-## Error Handling
+**Solution**: Make sure NovaScript-X is installed:
 
-The interpreter provides helpful error messages:
-- Syntax errors from the lexer and parser
-- Runtime errors from the executor
-- Type errors for invalid operations
-- Name errors for undefined variables/functions
+```bash
+pip install novascript-x
+# or
+pip install -e .
+```
+
+Verify installation:
+
+```bash
+novax --version
+```
+
+### Error: "File not found"
+
+**Solution**: Use absolute paths or ensure relative paths are correct:
+
+```bash
+# Absolute path
+novax /full/path/to/script.nova
+
+# Relative path from current directory
+novax ./scripts/script.nova
+
+# Current directory
+novax script.nova
+```
+
+### Error: "Module not found"
+
+**Solution**: The module name must match. Available modules are:
+- `fs` - File system
+- `math` - Mathematics
+- `console` - Logging
+- `random` - Random numbers
+- `date` - Date/time
+- `http` - HTTP requests
+
+```nova
+var fs = require("fs")      # Correct
+# var file = require("File")  # Wrong - use "fs"
+```
+
+### Error: "Expected X, got Y" (Syntax Error)
+
+**Solution**: Check your syntax carefully:
+
+```nova
+# Correct: colons and braces
+if (x > 5): {
+    print("yes")
+}
+
+# Wrong: missing colon
+if (x > 5) {
+    print("yes")
+}
+
+# Wrong: missing braces
+if (x > 5):
+    print("yes")
+```
+
+### Code doesn't run (no output)
+
+**Solution**: Make sure you're printing results:
+
+```nova
+var result = 5 + 3
+print(result)      # This displays the result
+
+# Without print, nothing is shown:
+var result = 5 + 3  # This runs but shows nothing
+```
+
+---
+
+## 📂 Project Structure
+
+```
+novascriptx/
+├── __init__.py              # Package initialization
+├── interpreter.py           # Core interpreter (Lexer, Parser, Executor)
+├── novascriptx_cli.py       # Command-line interface
+└── stdlib/                  # Standard library modules
+    ├── __init__.py
+    ├── console.py           # Logging/output
+    ├── date.py              # Date/time operations
+    ├── fs.py                # File system operations
+    ├── http.py              # HTTP requests
+    ├── math.py              # Math functions
+    └── random.py            # Random number generation
+
+examples/
+├── hello_world/
+│   └── main.nova
+├── functions_loops/
+│   └── main.nova
+└── stdlib_demo/
+    └── main.nova
+
+templates/                   # Web IDE (future)
+static/                      # Web IDE assets (future)
+
+setup.py                    # Package configuration
+requirements.txt            # Python dependencies
+README.md                   # This file
+```
+
+---
+
+## 🔌 Web IDE (Coming Soon)
+
+In future versions, NovaScript-X will include a browser-based IDE accessible at `localhost:5000` when running:
+
+```bash
+novax --serve
+```
+
+---
+
+## 🎓 Next Steps
+
+1. **Explore Examples**: Check the `examples/` directory for more programs
+2. **Read the USAGE Guide**: See `USAGE.md` for detailed tutorials
+3. **Experiment**: Create your own programs and test them
+4. **Share**: Contribute improvements back to the project!
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Quick Contribution Steps
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/new-feature`
+3. Make your changes
+4. Test thoroughly
+5. Commit with clear messages: `git commit -m "feat: Add new feature"`
+6. Push and create a Pull Request
+
+---
+
+## 📝 Development
+
+For developers who want to extend or improve NovaScript-X:
+
+- See [DEVELOPMENT.md](DEVELOPMENT.md) for architecture details
+- See [ROADMAP.md](ROADMAP.md) for planned features
+- Run tests: `pytest tests/` (when available)
+
+---
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/YourRepo/NovaScript-X/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/YourRepo/NovaScript-X/discussions)
+- **Documentation**: See [USAGE.md](USAGE.md) and examples/
+
+---
+
+## 📄 License
+
+MIT License - See LICENSE file for full details
+
+Open source software, free to use and modify.
+
+---
+
+## 🎉 Acknowledgments
+
+NovaScript-X is inspired by Node.js, Python, and JavaScript, bringing together the best features of modern runtimes.
+
+**Happy coding! 🚀**

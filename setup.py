@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-Setup configuration for NovaScript runtime.
+Setup configuration for NovaScript-X runtime.
 
 Install via: pip install .
 or: pip install -e . (for development)
 
-This creates the 'nova' command globally available on your system.
+This creates the 'novax' command globally available on your system.
 """
 
 from setuptools import setup, find_packages
 from pathlib import Path
 
 # Read version
-version_file = Path(__file__).parent / 'nova' / 'interpreter.py'
+version_file = Path(__file__).parent / 'novascriptx' / 'interpreter.py'
 version = None
 
 if version_file.exists():
@@ -34,21 +34,21 @@ if readme_file.exists():
         long_description = f.read()
 
 setup(
-    name='nova-script',
+    name='novascript-x',
     version=version,
-    description='NovaScript - A lightweight, modern programming language runtime',
+    description='NovaScript-X - A lightweight, modern programming language runtime',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Your Name',
     author_email='your.email@example.com',
-    url='https://github.com/YourRepo/NovaScript',
+    url='https://github.com/YourRepo/NovaScript-X',
     license='MIT',
     python_requires='>=3.7',
     packages=find_packages(),
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'nova=nova_cli:main',
+            'novax=novascriptx.novascriptx_cli:main',
         ],
     },
     classifiers=[
@@ -65,10 +65,10 @@ setup(
         'Topic :: Software Development :: Interpreters',
         'Topic :: Software Development :: Testing',
     ],
-    keywords='interpreter programming-language runtime nova-script',
+    keywords='interpreter programming-language runtime novascript language',
     project_urls={
-        'Documentation': 'https://github.com/YourRepo/NovaScript#readme',
-        'Source': 'https://github.com/YourRepo/NovaScript',
-        'Issues': 'https://github.com/YourRepo/NovaScript/issues',
+        'Documentation': 'https://github.com/YourRepo/NovaScript-X#readme',
+        'Source': 'https://github.com/YourRepo/NovaScript-X',
+        'Issues': 'https://github.com/YourRepo/NovaScript-X/issues',
     },
 )

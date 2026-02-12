@@ -1,0 +1,3 @@
+var math = require("math")
+var result = math.sqrt(625)
+print("sqrt(625) = " + result)

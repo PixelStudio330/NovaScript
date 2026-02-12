@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-NovaScript CLI - Command-line interface for the NovaScript runtime
+NovaScript-X CLI - Command-line interface for the NovaScript runtime
 
 Usage:
-    nova [options] [file.nova]
-    nova -v
-    nova --repl
-    nova --serve server.nova
-    nova --watch program.nova
+    novax [options] [file.nova]
+    novax -v
+    novax --repl
+    novax --serve server.nova
+    novax --watch program.nova
 
-This module provides the entry point for the 'nova' command when installed via pip.
+This module provides the entry point for the 'novax' command when installed via pip.
 """
 
 import argparse
@@ -19,7 +19,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-from nova.interpreter import run_code, run_file, run_repl, __version__
+from novascriptx.interpreter import run_code, run_file, run_repl, __version__
 
 
 def watch_file(filename: str, debug: bool = False) -> None:
@@ -112,13 +112,13 @@ def main(argv: Optional[list] = None) -> int:
         Exit code (0 for success, 1 for error)
     """
     parser = argparse.ArgumentParser(
-        prog='nova',
-        description='NovaScript Runtime - A lightweight programming language',
+        prog='novax',
+        description='NovaScript-X Runtime - A lightweight programming language',
         epilog='Examples:\n'
-               '  nova script.nova              # Run a script\n'
-               '  nova                          # Interactive REPL\n'
-               '  nova -w script.nova           # Watch mode\n'
-               '  nova --debug script.nova      # Debug mode',
+               '  novax script.nova              # Run a script\n'
+               '  novax                          # Interactive REPL\n'
+               '  novax -w script.nova           # Watch mode\n'
+               '  novax --debug script.nova      # Debug mode',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
@@ -126,7 +126,7 @@ def main(argv: Optional[list] = None) -> int:
     parser.add_argument(
         '-v', '--version',
         action='version',
-        version=f'NovaScript {__version__}'
+        version=f'NovaScript-X {__version__}'
     )
     
     # File execution
@@ -185,7 +185,7 @@ def main(argv: Optional[list] = None) -> int:
     elif args.serve_file:
         # Web server mode (TODO: implement)
         print(f"Error: Web server mode not yet implemented", file=sys.stderr)
-        print(f"Use: nova {args.serve_file} to run as regular script", file=sys.stderr)
+        print(f"Use: novax {args.serve_file} to run as regular script", file=sys.stderr)
         return 1
     
     elif args.watch and args.file:

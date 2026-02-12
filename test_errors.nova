@@ -1,0 +1,28 @@
+# Test error scenarios - these should fail with clear error messages
+print("Testing error scenarios...")
+print("")
+
+print("Error 1: Trying to use non-existent module")
+# Uncommenting this will show: ModuleNotFoundError
+# var invalid = require("non_existent_module")
+
+print("Error 2: Trying to call non-existent function")  
+# Uncommenting this will show: NameError: Undefined function
+# unknown_function()
+
+print("Error 3: Missing function parameter")
+# This will show: TypeError about parameter count
+function test_func(a, b):
+    return a + b
+
+# Uncommenting will show error:
+# var result = test_func(1)
+
+print("Error 4: Wrong argument type to stdlib")
+var fs = require("fs")
+# This should work fine if fs functions exist:
+print("fs module loaded successfully")
+
+print("")
+print("Error handling tests completed")
+

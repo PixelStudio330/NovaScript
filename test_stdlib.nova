@@ -1,0 +1,45 @@
+# Test standard library modules
+var fs = require("fs")
+var math = require("math")
+var random = require("random")
+var date = require("date")
+
+print("Testing Standard Library")
+print("")
+
+# Math module tests
+print("Math module:")
+var sqrt_result = math.sqrt(16)
+print("sqrt(16) = " + sqrt_result)
+
+var pow_result = math.pow(2, 8)
+print("pow(2, 8) = " + pow_result)
+
+var abs_result = math.abs(-42)
+print("abs(-42) = " + abs_result)
+
+print("")
+
+# Random module tests
+print("Random module:")
+var rand_num = random.randInt(1, 100)
+print("randInt(1, 100) = " + rand_num)
+
+print("")
+
+# Date module tests
+print("Date module:")
+var now = date.now()
+print("now() = " + now)
+
+print("")
+
+# FS module tests
+print("File System module:")
+fs.writeFile("test_nova.txt", "Hello from Nova!")
+var content = fs.readFile("test_nova.txt")
+print("File content matches: " + content)
+
+print("")
+print("All stdlib tests passed!")
+

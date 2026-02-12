@@ -573,8 +573,29 @@ class Parser:
         elif token.type == 'IDENTIFIER':
             name = self.advance().value
             
-            # Check if it's a function call
-            if self.current_token().type == 'LPAREN':
+            # Handle member access (e.g., object.property or object.method())
+            while self.current_token().type == 'DOT':
+                self.advance()  # consume DOT
+                member_name = self.expect('IDENTIFIER').value
+                
+                # Check if it's a method call
+                if self.current_token().type == 'LPAREN':
+                    self.advance()
+                    args = []
+                    while self.current_token().type != 'RPAREN':
+                        args.append(self.parse_expression())
+                        if self.current_token().type == 'COMMA':
+                            self.advance()
+                    
+                    self.expect('RPAREN')
+                    # Create a member call node
+                    name = {'type': 'member_call', 'object': name, 'member': member_name, 'args': args}
+                else:
+                    # Create a member access node
+                    name = {'type': 'member_access', 'object': name, 'member': member_name}
+            
+            # Check if the final identifier (or member expression) is a function call
+            if isinstance(name, str) and self.current_token().type == 'LPAREN':
                 self.advance()
                 args = []
                 while self.current_token().type != 'RPAREN':
@@ -585,7 +606,7 @@ class Parser:
                 self.expect('RPAREN')
                 return {'type': 'call', 'name': name, 'args': args}
             else:
-                return {'type': 'identifier', 'name': name}
+                return name if isinstance(name, dict) else {'type': 'identifier', 'name': name}
         
         elif token.type == 'LPAREN':
             self.advance()
@@ -714,6 +735,38 @@ class Executor:
                 return self.global_scope[name]
             else:
                 raise NameError(f"Undefined variable: {name}")
+        
+        elif expr_type == 'member_access':
+            obj = self.evaluate_expression({'type': 'identifier', 'name': expr['object']} if isinstance(expr['object'], str) else expr['object'])
+            member = expr['member']
+            
+            if not isinstance(obj, dict):
+                raise TypeError(f"Cannot access member '{member}' on non-object type: {type(obj).__name__}")
+            
+            if member not in obj:
+                raise AttributeError(f"Object has no member '{member}'")
+            
+            return obj[member]
+        
+        elif expr_type == 'member_call':
+            obj = self.evaluate_expression({'type': 'identifier', 'name': expr['object']} if isinstance(expr['object'], str) else expr['object'])
+            member = expr['member']
+            args = [self.evaluate_expression(arg) for arg in expr['args']]
+            
+            if not isinstance(obj, dict):
+                raise TypeError(f"Cannot call method '{member}' on non-object type: {type(obj).__name__}")
+            
+            if member not in obj:
+                raise AttributeError(f"Object has no method '{member}'")
+            
+            method = obj[member]
+            
+            # Check if it's callable
+            if not callable(method):
+                raise TypeError(f"'{member}' is not a method")
+            
+            # Call the method
+            return method(*args)
         
         elif expr_type == 'binary_op':
             return self.evaluate_binary_op(expr)
